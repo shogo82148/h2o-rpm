@@ -1,4 +1,4 @@
-SOURCE_ARCHIVE := v2.2.6.tar.gz
+SOURCE_ARCHIVE := cf59e67c3684e7ae319a3f6888fc27adbda732c7.tar.gz
 TARGZ_FILE := h2o.tar.gz
 IMAGE_NAME := h2o-package
 
