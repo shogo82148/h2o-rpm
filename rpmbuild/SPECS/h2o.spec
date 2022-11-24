@@ -64,6 +64,7 @@ build your own software using H2O.
 %prep
 %setup -q
 %patch1 -p1 -b .c99
+%patch2 -p1 -b .mruby
 
 %build
 %if 0%{?rhel} >= 8
