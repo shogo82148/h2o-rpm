@@ -19,6 +19,7 @@ jobs:
       matrix:
         distribution:
           - amazonlinux2
+          - amazonlinux2022
           - almalinux8
           - almalinux9
           - rockylinux8

@@ -14,6 +14,7 @@ Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
 Patch1: 02-fix-c99-compile-error.patch
+Patch2: 03-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -54,7 +55,7 @@ Summary: Development interfaces for H2O
 Requires: openssl-devel, libuv-devel, pkgconfig
 Requires: libh2o = %{version}-%{release}
 Requires: libh2o-evloop = %{version}-%{release}
-Obsoletes: h2o-devel
+Obsoletes: h2o-devel < 3.0
 
 %description -n libh2o-devel
 libh2o-devel package provides H2O header files and helpers which allow you to
@@ -63,6 +64,7 @@ build your own software using H2O.
 %prep
 %setup -q
 %patch1 -p1 -b .c99
+%patch2 -p1 -b .mruby
 
 %build
 %if 0%{?rhel} >= 8
@@ -159,7 +161,7 @@ fi
 %systemd_preun h2o.service
 
 %postun
-%systemd_postun
+%systemd_postun h2o.service
 
 %post -n libh2o -p /sbin/ldconfig
 
