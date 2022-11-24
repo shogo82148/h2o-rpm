@@ -6,7 +6,7 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2 server
 Name: h2o
 Version: 2.2.6
-Release: 4%{?dist}
+Release: 5%{?dist}
 URL: https://h2o.examp1e.net/
 Source0: https://github.com/h2o/h2o/archive/v%{version}.tar.gz
 Source1: index.html
@@ -221,6 +221,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+* Thu Nov 24 2021 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-5
+- fix base image of AlmaLinux9 and Rockey Linux9
+
 * Thu Nov 24 2021 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-4
 - add AlmaLinux9, Rockey Linux9 and Amazon Linux 2022
 
