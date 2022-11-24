@@ -10,10 +10,7 @@ RUN yum install -y \
         tar \
         make \
         openssl-devel \
-<<<<<<< HEAD
-=======
         zlib \
->>>>>>> add-missing-dependency-of-zlib
         zlib-devel \
         libuv-devel \
         ruby \

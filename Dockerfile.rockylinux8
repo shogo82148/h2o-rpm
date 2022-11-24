@@ -11,10 +11,7 @@ RUN dnf install -y \
         tar \
         make \
         openssl-devel \
-<<<<<<< HEAD
-=======
         zlib \
->>>>>>> add-missing-dependency-of-zlib
         zlib-devel \
         ruby \
         ruby-devel \
