@@ -1,4 +1,4 @@
-FROM almalinux:8
+FROM almalinux:9
 ENV HOME /
 RUN dnf update -y
 RUN dnf install -y \
