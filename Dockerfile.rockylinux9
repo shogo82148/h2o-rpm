@@ -11,6 +11,8 @@ RUN dnf install -y \
         tar \
         make \
         openssl-devel \
+        zlib \
+        zlib-devel \
         ruby \
         ruby-devel \
         bison \
