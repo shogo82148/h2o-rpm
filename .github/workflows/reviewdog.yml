@@ -22,6 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: rpmlint
-        uses: shogo82148/actions-rpmlint@v1
+        uses: shogo82148/actions-rpmlint@v0
         with:
           rpmlint_flags: rpmbuild/SPECS/h2o.spec
