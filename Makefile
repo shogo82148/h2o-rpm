@@ -37,11 +37,7 @@ upload:
 	./scripts/upload.pl
 
 .PHONY: test
-<<<<<<< HEAD
-test: test-amazonlinux2 test-amazonlinux2022 test-almalinux8 test-rockylinux8
-=======
-test: test-amazonlinux2 test-almalinux8 test-almalinux9 test-rockylinux8 test-rockylinux9
->>>>>>> add-missing-dependency-of-zlib
+test: test-amazonlinux2 test-amazonlinux2022 test-almalinux8 test-almalinux9 test-rockylinux8 test-rockylinux9
 
 .PHONY: test-amazonlinux2
 test-amazonlinux2:
