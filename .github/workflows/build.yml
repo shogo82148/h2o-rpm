@@ -7,6 +7,10 @@ on:
   release:
     types: [published]
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,9 +19,10 @@ jobs:
       matrix:
         distribution:
           - amazonlinux2
-          - centos7
           - almalinux8
+          - almalinux9
           - rockylinux8
+          - rockylinux9
         platform:
           - linux/amd64
           - linux/arm64

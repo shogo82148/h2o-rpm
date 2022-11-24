@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/libwslay \
     && ./configure --prefix=/usr --enable-shared="" --disable-shared --with-pic && make && make install
 
 RUN rpmdev-setuptree
-RUN echo '%dist   .el8' >> /.rpmmacros
+RUN echo '%dist   .el9' >> /.rpmmacros
 ADD ./rpmbuild/ /rpmbuild/
 RUN chown -R root:root /rpmbuild
 RUN rpmbuild -ba /rpmbuild/SPECS/h2o.spec
