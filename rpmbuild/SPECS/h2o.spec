@@ -14,6 +14,7 @@ Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
+Patch1: libh2o-evloop-link.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -62,6 +63,7 @@ build your own software using H2O.
 
 %prep
 %setup -q -b 6 -n h2o-2.3.0-beta2
+%patch1 -p1
 
 %build
 
