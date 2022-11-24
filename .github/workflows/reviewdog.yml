@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: actionlint
-        uses: reviewdog/action-actionlint@1
+        uses: reviewdog/action-actionlint@v1
 
   rpmlint:
     name: runner / rpmlint
@@ -22,4 +22,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: rpmlint
-        uses: reviewdog/action-actionlint@1
+        uses: reviewdog/action-actionlint@v1
