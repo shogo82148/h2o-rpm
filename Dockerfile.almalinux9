@@ -19,7 +19,7 @@ RUN dnf install -y \
         libtool \
         git
 
-RUN dnf --enablerepo powertools install -y libuv-devel
+RUN dnf --enablerepo crb install -y libuv-devel
 
 ENV LIBWSLAY_VERSION=1.1.1
 RUN mkdir -p /tmp/libwslay \
