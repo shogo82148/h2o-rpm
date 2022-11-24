@@ -68,7 +68,7 @@ build your own software using H2O.
 %build
 
 cd ../wslay-1.1.1
-./configure --prefix=%{_prefix} --enable-shared="" --disable-shared --with-pic
+%configure --enable-shared="" --disable-shared --with-pic
 make && make install
 
 cd ../h2o-2.3.0-beta2
@@ -192,12 +192,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/lib/tmpfiles.d/h2o.conf
 
 %{_sbindir}/h2o
+%{_sbindir}/h2o-httpclient
 %{_datadir}/h2o/annotate-backtrace-symbols
 %{_datadir}/h2o/fastcgi-cgi
 %{_datadir}/h2o/fetch-ocsp-response
 %{_datadir}/h2o/kill-on-close
 %{_datadir}/h2o/setuidgid
 %{_datadir}/h2o/start_server
+
+%{_mandir}/man5/h2o.*
+%{_mandir}/man8/h2o.8*
 
 %{_datadir}/h2o/mruby
 %{_datadir}/doc
