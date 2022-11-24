@@ -17,13 +17,13 @@ Patch1: 02-fix-c99-compile-error.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: gcc-c++, openssl-devel, pkgconfig, bison
+BuildRequires: gcc-c++, openssl-devel, pkgconfig, bison, zlib-devel
 %if 0%{?rhel} >= 8
 BuildRequires: cmake
 %else
 BuildRequires: cmake3
 %endif
-Requires: openssl, perl
+Requires: openssl, perl, zlib
 BuildRequires: systemd-units
 Requires(preun): systemd
 Requires(postun): systemd
