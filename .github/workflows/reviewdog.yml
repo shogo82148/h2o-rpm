@@ -22,6 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: rpmlint
-        uses: reviewdog/action-actionlint@v1
+        uses: reviewdog/action-rpmlint@v1
         with:
           rpmlint_flags: rpmbuild/SPECS/h2o.spec
