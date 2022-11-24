@@ -38,4 +38,6 @@ sub upload {
 upload "amazonlinux2", "amazonlinux/2";
 upload "amazonlinux2022", "amazonlinux/2022";
 upload "almalinux8", "almalinux/8";
+upload "almalinux9", "almalinux/9";
 upload "rockylinux8", "rockylinux/8";
+upload "rockylinux9", "rockylinux/9";
