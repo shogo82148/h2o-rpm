@@ -10,6 +10,7 @@ RUN yum install -y \
         tar \
         make \
         openssl-devel \
+        zlib-devel \
         libuv-devel \
         ruby \
         ruby-devel \
