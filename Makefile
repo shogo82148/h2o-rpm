@@ -1,4 +1,6 @@
 SOURCE_ARCHIVE := v2.3.0-beta2.tar.gz
+WSLAY_VERSION := 1.1.1
+WSLAY_SOURCE_ARCHIVE := wslay-$(WSLAY_VERSION).tar.gz
 TARGZ_FILE := h2o.tar.gz
 IMAGE_NAME := h2o-package
 
@@ -26,7 +28,11 @@ rockylinux9: rockylinux9.build
 rpmbuild/SOURCES/$(SOURCE_ARCHIVE):
 	curl -SL https://github.com/h2o/h2o/archive/$(SOURCE_ARCHIVE) -o rpmbuild/SOURCES/$(SOURCE_ARCHIVE)
 
+rpmbuild/SOURCES/$(WSLAY_SOURCE_ARCHIVE):
+	curl -sSL https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz -o rpmbuild/SOURCES/$(WSLAY_SOURCE_ARCHIVE)
+
 %.build: rpmbuild/SPECS/h2o.spec rpmbuild/SOURCES/$(SOURCE_ARCHIVE) \
+		rpmbuild/SOURCES/$(WSLAY_SOURCE_ARCHIVE) \
 		rpmbuild/SOURCES/h2o.conf \
 		rpmbuild/SOURCES/h2o.logrotate rpmbuild/SOURCES/h2o.service \
 		rpmbuild/SOURCES/h2o.tmpfiles rpmbuild/SOURCES/index.html
