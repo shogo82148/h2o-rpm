@@ -14,6 +14,7 @@ Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
 Patch1: 02-fix-c99-compile-error.patch
+Patch2: 03-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
