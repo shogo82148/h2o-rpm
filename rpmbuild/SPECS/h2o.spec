@@ -54,7 +54,7 @@ Summary: Development interfaces for H2O
 Requires: openssl-devel, libuv-devel, pkgconfig
 Requires: libh2o = %{version}-%{release}
 Requires: libh2o-evloop = %{version}-%{release}
-Obsoletes: h2o-devel
+Obsoletes: h2o-devel < 3.0
 
 %description -n libh2o-devel
 libh2o-devel package provides H2O header files and helpers which allow you to
