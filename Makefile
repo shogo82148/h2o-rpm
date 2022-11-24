@@ -1,4 +1,4 @@
-SOURCE_ARCHIVE := v2.2.6.tar.gz
+SOURCE_ARCHIVE := v2.3.0-beta2.tar.gz
 TARGZ_FILE := h2o.tar.gz
 IMAGE_NAME := h2o-package
 
@@ -27,7 +27,7 @@ rpmbuild/SOURCES/$(SOURCE_ARCHIVE):
 	curl -SL https://github.com/h2o/h2o/archive/$(SOURCE_ARCHIVE) -o rpmbuild/SOURCES/$(SOURCE_ARCHIVE)
 
 %.build: rpmbuild/SPECS/h2o.spec rpmbuild/SOURCES/$(SOURCE_ARCHIVE) \
-		rpmbuild/SOURCES/02-fix-c99-compile-error.patch rpmbuild/SOURCES/h2o.conf \
+		rpmbuild/SOURCES/h2o.conf \
 		rpmbuild/SOURCES/h2o.logrotate rpmbuild/SOURCES/h2o.service \
 		rpmbuild/SOURCES/h2o.tmpfiles rpmbuild/SOURCES/index.html
 	./scripts/build.sh $*
