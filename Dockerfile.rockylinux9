@@ -20,7 +20,7 @@ RUN dnf install -y \
         libtool \
         git
 
-RUN dnf --enablerepo powertools install -y libuv-devel
+RUN dnf --enablerepo crb install -y libuv-devel
 
 RUN rpmdev-setuptree
 RUN echo '%dist   .el9' >> /.rpmmacros
