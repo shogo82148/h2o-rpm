@@ -159,7 +159,7 @@ fi
 %systemd_preun h2o.service
 
 %postun
-%systemd_postun
+%systemd_postun h2o.service
 
 %post -n libh2o -p /sbin/ldconfig
 
