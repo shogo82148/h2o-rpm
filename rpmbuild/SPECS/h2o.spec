@@ -233,6 +233,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+* Fri Nov 25 2022 Ichinose Shogo <shogo82148@gmail.com> - 2.3.0-1
+- bump v2.3.0-beta2 (c451265)
+
 * Thu Nov 24 2022 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-5
 - fix base image of AlmaLinux9 and Rockey Linux9
 
