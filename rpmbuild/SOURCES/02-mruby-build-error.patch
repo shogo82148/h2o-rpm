@@ -1,0 +1,24 @@
+diff --git a/deps/mruby/Rakefile b/deps/mruby/Rakefile
+index 6c160a5ed..d949eab25 100644
+--- a/deps/mruby/Rakefile
++++ b/deps/mruby/Rakefile
+@@ -142,16 +142,16 @@ end
+ desc "clean all built and in-repo installed artifacts"
+ task :clean do
+   MRuby.each_target do |t|
+-    FileUtils.rm_rf t.build_dir, { :verbose => $verbose }
++    FileUtils.rm_rf t.build_dir
+   end
+-  FileUtils.rm_f depfiles, { :verbose => $verbose }
++  FileUtils.rm_f depfiles
+   puts "Cleaned up target build folder"
+ end
+ 
+ desc "clean everything!"
+ task :deep_clean => ["clean"] do
+   MRuby.each_target do |t|
+-    FileUtils.rm_rf t.gem_clone_dir, { :verbose => $verbose }
++    FileUtils.rm_rf t.gem_clone_dir
+   end
+   puts "Cleaned up mrbgems build folder"
+ end
