@@ -16,13 +16,21 @@ if [[ "$H2O_DISTRO" = amazonlinux2022 ]]; then
         sh -c "dnf update -y && dnf install -y \"/build/RPMS/\$(uname -m)/\"*.rpm"
 
 elif docker run --rm --platform "$PLATFORM" "$IMAGE" sh -c "command -v dnf"; then
-    docker run \
-        --rm \
-        -v "$ROOT/$H2O_DISTRO.build:/build" \
-        --platform "$PLATFORM" \
-        "$IMAGE" \
-        sh -c "dnf update -y && dnf --enablerepo powertools install -y \"/build/RPMS/\$(uname -m)/\"*.rpm"
-
+    if docker run --rm --platform "$PLATFORM" "$IMAGE" sh -c " dnf repolist --all" | grep powertools; then
+        docker run \
+            --rm \
+            -v "$ROOT/$H2O_DISTRO.build:/build" \
+            --platform "$PLATFORM" \
+            "$IMAGE" \
+            sh -c "dnf update -y && dnf --enablerepo powertools install -y \"/build/RPMS/\$(uname -m)/\"*.rpm"
+    else
+        docker run \
+            --rm \
+            -v "$ROOT/$H2O_DISTRO.build:/build" \
+            --platform "$PLATFORM" \
+            "$IMAGE" \
+            sh -c "dnf update -y && dnf --enablerepo crb install -y \"/build/RPMS/\$(uname -m)/\"*.rpm"
+    fi
 else 
     docker run \
         --rm \
