@@ -15,7 +15,7 @@ Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
 Patch1: 01-libh2o-evloop-link.patch
-Patch1: 02-mruby-build-error.patch
+Patch2: 02-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
