@@ -73,7 +73,7 @@ cd ../wslay-1.1.1
 %configure --enable-shared="" --disable-shared --with-pic
 make && make install
 
-cd ../h2o-2.3.0-beta2
+cd ../h2o-6dfa40b6831944361aa60c844677f63ba8d2d134
 
 %if 0%{?rhel} >= 8
 cmake -DWITH_BUNDLED_SSL=on -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
