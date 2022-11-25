@@ -5,16 +5,17 @@
 
 Summary: H2O - The optimized HTTP/1, HTTP/2 server
 Name: h2o
-Version: 2.2.6
-Release: 5%{?dist}
+Version: 2.3.0
+Release: 1%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/v%{version}.tar.gz
+Source0: https://github.com/h2o/h2o/archive/v%{version}-beta2.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
-Patch1: 02-fix-c99-compile-error.patch
-Patch2: 03-mruby-build-error.patch
+Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
+Patch1: 01-libh2o-evloop-link.patch
+Patch2: 02-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -62,11 +63,18 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q
-%patch1 -p1 -b .c99
-%patch2 -p1 -b .mruby
+%setup -q -b 6 -n h2o-2.3.0-beta2
+%patch1 -p1
+%patch2 -p1
 
 %build
+
+cd ../wslay-1.1.1
+%configure --enable-shared="" --disable-shared --with-pic
+make && make install
+
+cd ../h2o-2.3.0-beta2
+
 %if 0%{?rhel} >= 8
 cmake -DWITH_BUNDLED_SSL=on -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
 %else
@@ -186,12 +194,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/lib/tmpfiles.d/h2o.conf
 
 %{_sbindir}/h2o
+%{_sbindir}/h2o-httpclient
 %{_datadir}/h2o/annotate-backtrace-symbols
 %{_datadir}/h2o/fastcgi-cgi
 %{_datadir}/h2o/fetch-ocsp-response
 %{_datadir}/h2o/kill-on-close
 %{_datadir}/h2o/setuidgid
 %{_datadir}/h2o/start_server
+
+%{_mandir}/man5/h2o.*
+%{_mandir}/man8/h2o.8*
 
 %{_datadir}/h2o/mruby
 %{_datadir}/doc
