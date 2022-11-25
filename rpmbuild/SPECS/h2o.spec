@@ -221,10 +221,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
-* Thu Nov 24 2021 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-5
+* Thu Nov 24 2022 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-5
 - fix base image of AlmaLinux9 and Rockey Linux9
 
-* Thu Nov 24 2021 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-4
+* Thu Nov 24 2022 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-4
 - add AlmaLinux9, Rockey Linux9 and Amazon Linux 2022
 
 * Tue Mar 02 2021 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-3
