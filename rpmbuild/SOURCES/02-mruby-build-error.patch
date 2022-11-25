@@ -1,8 +1,22 @@
 diff --git a/deps/mruby/Rakefile b/deps/mruby/Rakefile
-index 6c160a5ed..d949eab25 100644
+index 6c160a5ed..c51beb3aa 100644
 --- a/deps/mruby/Rakefile
 +++ b/deps/mruby/Rakefile
-@@ -142,16 +142,16 @@ end
+@@ -33,10 +33,9 @@ load "#{MRUBY_ROOT}/tasks/benchmark.rake"
+ load "#{MRUBY_ROOT}/tasks/gitlab.rake"
+ 
+ def install_D(src, dst)
+-  opts = { :verbose => $verbose }
+-  FileUtils.rm_f dst, opts
+-  FileUtils.mkdir_p File.dirname(dst), opts
+-  FileUtils.cp src, dst, opts
++  FileUtils.rm_f dst
++  FileUtils.mkdir_p File.dirname(dst)
++  FileUtils.cp src, dst
+ end
+ 
+ ##############################
+@@ -142,16 +141,16 @@ end
  desc "clean all built and in-repo installed artifacts"
  task :clean do
    MRuby.each_target do |t|
