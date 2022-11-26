@@ -8,7 +8,7 @@ Name: h2o
 Version: 2.3.0
 Release: 3%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/3007562f8b427d671d9517df8caeda7ae73d8b29.tar.gz
+Source0: https://github.com/h2o/h2o/archive/7081e14ec4a20a7712625ca7794ae0185413860b.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
@@ -63,7 +63,7 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -b 6 -n h2o-3007562f8b427d671d9517df8caeda7ae73d8b29
+%setup -q -b 6 -n h2o-7081e14ec4a20a7712625ca7794ae0185413860b
 %patch1 -p1
 %patch2 -p1
 
@@ -73,7 +73,7 @@ cd ../wslay-1.1.1
 %configure --enable-shared="" --disable-shared --with-pic
 make && make install
 
-cd ../h2o-3007562f8b427d671d9517df8caeda7ae73d8b29
+cd ../h2o-7081e14ec4a20a7712625ca7794ae0185413860b
 
 %if 0%{?rhel} >= 8
 cmake -DWITH_BUNDLED_SSL=on -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
@@ -233,6 +233,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+* Sat Nov 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-5
+- bump v2.3.0-7081e14
+
 * Sat Nov 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-4
 - bump v2.3.0-3007562
 
