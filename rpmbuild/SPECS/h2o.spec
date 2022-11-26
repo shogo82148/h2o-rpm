@@ -14,7 +14,6 @@ Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
-Patch1: 01-libh2o-evloop-link.patch
 Patch2: 02-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
@@ -64,7 +63,6 @@ build your own software using H2O.
 
 %prep
 %setup -q -b 6 -n h2o-7081e14ec4a20a7712625ca7794ae0185413860b
-%patch1 -p1
 %patch2 -p1
 
 %build
