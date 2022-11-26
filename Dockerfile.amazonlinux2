@@ -27,6 +27,11 @@ RUN mkdir -p /tmp/libbrotli \
     && cd /tmp/libbrotli/ && tar xf libbrotli.tar.gz && cd brotli-${LIBBROTLI_VERSION} \
     && mkdir out && cd out && cmake3 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_STATIC_LIBS=ON .. && cmake3 --build . --config Release --target install
 
+# workaround: https://github.com/google/brotli/issues/795#issuecomment-594156191
+RUN cp /usr/lib64/libbrotlienc-static.a /usr/lib64/libbrotlienc.a && \
+        cp /usr/lib64/libbrotlidec-static.a /usr/lib64/libbrotlidec.a && \
+        cp /usr/lib64/libbrotlicommon-static.a /usr/lib64/libbrotlicommon.a
+
 ENV LIBWSLAY_VERSION=1.1.1
 RUN mkdir -p /tmp/libwslay \
     && curl -sSL https://github.com/tatsuhiro-t/wslay/releases/download/release-${LIBWSLAY_VERSION}/wslay-${LIBWSLAY_VERSION}.tar.gz -o /tmp/libwslay/libwslay.tar.gz \
