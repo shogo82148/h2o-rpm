@@ -21,6 +21,12 @@ RUN dnf install -y \
         libtool \
         git
 
+ENV LIBWSLAY_VERSION=1.1.1
+RUN mkdir -p /tmp/libwslay \
+    && curl -sSL https://github.com/tatsuhiro-t/wslay/releases/download/release-${LIBWSLAY_VERSION}/wslay-${LIBWSLAY_VERSION}.tar.gz -o /tmp/libwslay/libwslay.tar.gz \
+    && cd /tmp/libwslay/ && tar xf libwslay.tar.gz && cd wslay-${LIBWSLAY_VERSION} \
+    && ./configure --prefix=/usr --enable-shared="" --disable-shared --with-pic && make && make install
+
 ENV PKG_CONFIG_PATH=/usr/lib/pkgconfig
 RUN rpmdev-setuptree
 RUN echo '%dist   .amzn2022' >> /.rpmmacros

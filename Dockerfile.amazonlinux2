@@ -20,6 +20,18 @@ RUN yum install -y \
         libtool \
         git
 
+ENV LIBBROTLI_VERSION=1.0.9
+RUN mkdir -p /tmp/libbrotli \
+    && curl -sSL https://github.com/google/brotli/archive/refs/tags/v${LIBBROTLI_VERSION}.tar.gz -o /tmp/libbrotli/libbrotli.tar.gz \
+    && cd /tmp/libbrotli/ && tar xf libbrotli.tar.gz && cd brotli-${LIBBROTLI_VERSION} \
+    && mkdir out && cd out && cmake3 -DCMAKE_BUILD_TYPE=Release .. && cmake3 --build . --config Release --target all
+
+ENV LIBWSLAY_VERSION=1.1.1
+RUN mkdir -p /tmp/libwslay \
+    && curl -sSL https://github.com/tatsuhiro-t/wslay/releases/download/release-${LIBWSLAY_VERSION}/wslay-${LIBWSLAY_VERSION}.tar.gz -o /tmp/libwslay/libwslay.tar.gz \
+    && cd /tmp/libwslay/ && tar xf libwslay.tar.gz && cd wslay-${LIBWSLAY_VERSION} \
+    && ./configure --prefix=/usr --enable-shared="" --disable-shared --with-pic && make && make install
+
 ENV PKG_CONFIG_PATH=/usr/lib/pkgconfig
 RUN rpmdev-setuptree
 RUN echo '%dist   .amzn2' >> /.rpmmacros

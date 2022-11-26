@@ -13,7 +13,6 @@ Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
-Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
 Patch2: 02-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
@@ -62,17 +61,9 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -b 6 -n h2o-0a9ddbd14dd3004a8fa28c2c7904065fbada7afe
-%patch2 -p1
+%setup -q -n h2o-0a9ddbd14dd3004a8fa28c2c7904065fbada7afe
 
 %build
-
-cd ../wslay-1.1.1
-%configure --enable-shared="" --disable-shared --with-pic
-make && make install
-
-cd ../h2o-0a9ddbd14dd3004a8fa28c2c7904065fbada7afe
-
 %if 0%{?rhel} >= 8
 cmake -DWITH_BUNDLED_SSL=on -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
 %else
