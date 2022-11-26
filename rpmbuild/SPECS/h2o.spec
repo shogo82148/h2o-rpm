@@ -232,7 +232,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Sat Nov 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-8
-- bump v2.3.0-b4775b5
+- bump v2.3.0-0a9ddbd1
 
 * Sat Nov 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-7
 - bump v2.3.0-b4775b5
