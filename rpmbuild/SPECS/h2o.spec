@@ -62,6 +62,7 @@ build your own software using H2O.
 
 %prep
 %setup -q -n h2o-0a9ddbd14dd3004a8fa28c2c7904065fbada7afe
+%patch2 -p1
 
 %build
 %if 0%{?rhel} >= 8
