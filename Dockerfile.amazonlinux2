@@ -7,6 +7,7 @@ RUN yum install -y \
         rpmdevtools \
         cmake3 \
         gcc-c++ \
+        pkgconfig \
         tar \
         make \
         openssl-devel \
@@ -24,7 +25,7 @@ ENV LIBBROTLI_VERSION=1.0.9
 RUN mkdir -p /tmp/libbrotli \
     && curl -sSL https://github.com/google/brotli/archive/refs/tags/v${LIBBROTLI_VERSION}.tar.gz -o /tmp/libbrotli/libbrotli.tar.gz \
     && cd /tmp/libbrotli/ && tar xf libbrotli.tar.gz && cd brotli-${LIBBROTLI_VERSION} \
-    && mkdir out && cd out && cmake3 -DCMAKE_BUILD_TYPE=Release .. && cmake3 --build . --config Release --target all
+    && mkdir out && cd out && cmake3 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_STATIC_LIBS=ON .. && cmake3 --build . --config Release --target install
 
 ENV LIBWSLAY_VERSION=1.1.1
 RUN mkdir -p /tmp/libwslay \
