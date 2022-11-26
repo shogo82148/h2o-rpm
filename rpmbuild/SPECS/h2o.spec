@@ -6,9 +6,9 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2 server
 Name: h2o
 Version: 2.3.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/bf545b8e12b276ae3010320a2db76fd7a76ada6a.tar.gz
+Source0: https://github.com/h2o/h2o/archive/b4775b5320ad5061761bd72d5a8092d49e2e4f93.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
@@ -62,7 +62,7 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -b 6 -n h2o-bf545b8e12b276ae3010320a2db76fd7a76ada6a
+%setup -q -b 6 -n h2o-b4775b5320ad5061761bd72d5a8092d49e2e4f93
 %patch2 -p1
 
 %build
@@ -71,7 +71,7 @@ cd ../wslay-1.1.1
 %configure --enable-shared="" --disable-shared --with-pic
 make && make install
 
-cd ../h2o-bf545b8e12b276ae3010320a2db76fd7a76ada6a
+cd ../h2o-b4775b5320ad5061761bd72d5a8092d49e2e4f93
 
 %if 0%{?rhel} >= 8
 cmake -DWITH_BUNDLED_SSL=on -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
