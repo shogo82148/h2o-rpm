@@ -6,9 +6,9 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2 server
 Name: h2o
 Version: 2.3.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/6dfa40b6831944361aa60c844677f63ba8d2d134.tar.gz
+Source0: https://github.com/h2o/h2o/archive/8db6ef8b12b533e91f1b064e517d886cad98234e.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
@@ -63,7 +63,7 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -b 6 -n h2o-6dfa40b6831944361aa60c844677f63ba8d2d134
+%setup -q -b 6 -n h2o-8db6ef8b12b533e91f1b064e517d886cad98234e
 %patch1 -p1
 %patch2 -p1
 
@@ -73,7 +73,7 @@ cd ../wslay-1.1.1
 %configure --enable-shared="" --disable-shared --with-pic
 make && make install
 
-cd ../h2o-6dfa40b6831944361aa60c844677f63ba8d2d134
+cd ../h2o-8db6ef8b12b533e91f1b064e517d886cad98234e
 
 %if 0%{?rhel} >= 8
 cmake -DWITH_BUNDLED_SSL=on -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
@@ -233,27 +233,33 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
-* Fri Nov 25 2022 Ichinose Shogo <shogo82148@gmail.com> - 2.3.0-1
+* Sat Nov 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-3
+- bump v2.3.0-8db6ef8
+
+* Sat Nov 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-2
+- bump v2.3.0-6dfa40b
+
+* Fri Nov 25 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-1
 - bump v2.3.0-beta2 (c451265)
 
-* Thu Nov 24 2022 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-5
+* Thu Nov 24 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.2.6-5
 - fix base image of AlmaLinux9 and Rockey Linux9
 
-* Thu Nov 24 2022 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-4
+* Thu Nov 24 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.2.6-4
 - add AlmaLinux9, Rockey Linux9 and Amazon Linux 2022
 
-* Tue Mar 02 2021 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-3
+* Tue Mar 02 2021 ICHINOSE Shogo <shogo82148@gmail.com> - 2.2.6-3
 - fix broken docroot
 
-* Mon Feb 22 2021 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-2
+* Mon Feb 22 2021 ICHINOSE Shogo <shogo82148@gmail.com> - 2.2.6-2
 - Bump libuv v1.41.0
 - Bump libwslay v1.1.1
 
-* Wed Aug 14 2019 Ichinose Shogo <shogo82148@gmail.com> - 2.2.6-1
+* Wed Aug 14 2019 ICHINOSE Shogo <shogo82148@gmail.com> - 2.2.6-1
 - This is a bug-fix release of the 2.2 series with following changes from 2.2.5, including a vulnerability fix.
 - [security fix][http2] fix HTTP/2 DoS attack vectors CVE-2019-9512 CVE-2019-9514 CVE-2019-9515 #2090 (Kazuho Oku)
 
-* Wed May  1 2019 Ichinose Shogo <shogo82148@gmail.com> - 2.2.5-2
+* Wed May  1 2019 ICHINOSE Shogo <shogo82148@gmail.com> - 2.2.5-2
 - Add amazonlinux2 support
 
 * Fri Jun  1 2018 Tatsushi Demachi <tdemachi@gmail.com> - 2.2.5-1
