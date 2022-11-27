@@ -13,6 +13,8 @@ Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
+Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
+Source7: brotli-1.0.9.tar.gz
 Patch2: 02-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
@@ -65,6 +67,19 @@ build your own software using H2O.
 %patch2 -p1
 
 %build
+tar xf %{SOURCE7}
+cd brotli-1.0.9
+mkdir out && cd out
+cmake3 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/libexec/h2o ..
+cmake3 --build . --config Release --target install
+cd ../..
+
+tar xf %{SOURCE6}
+cd wslay-1.1.1
+%configure --enable-shared="" --disable-shared --with-pic
+make && make install
+cd ..
+
 %if 0%{?rhel} >= 8
 cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
 %else
