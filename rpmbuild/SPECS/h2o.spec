@@ -17,16 +17,15 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2 server
 Name: h2o
 Version: 2.3.0
-Release: 9%{?dist}
+Release: 11%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/ec1090a3d8c101f9c2f195bbea4370e36da95db7.tar.gz
+Source0: https://github.com/h2o/h2o/archive/0a9ddbd14dd3004a8fa28c2c7904065fbada7afe.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
 Source7: brotli-1.0.9.tar.gz
-Patch1: 01-fix-brotli-link-error.patch
 Patch2: 02-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
@@ -79,8 +78,7 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -n h2o-ec1090a3d8c101f9c2f195bbea4370e36da95db7
-%patch1 -p1
+%setup -q -n h2o-0a9ddbd14dd3004a8fa28c2c7904065fbada7afe
 %patch2 -p1
 
 %build
@@ -273,6 +271,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+* Mon Nov 28 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-11
+- bump v2.3.0-0a9ddbd14
+
 * Mon Nov 28 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-10
 - bump v2.3.0-ec1090a3
 
