@@ -100,11 +100,7 @@ cd wslay-1.1.1
 make %{?_smp_mflags} && make install
 cd ..
 
-%if 0%{?rhel} >= 8
 %cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
-%else
-%cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
-%endif
 
 make %{?_smp_mflags}
 
