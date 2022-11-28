@@ -13,6 +13,7 @@ RUN dnf install -y \
         openssl-devel \
         libuv-devel \
         zlib-devel \
+        brotli-devel \
         ruby \
         ruby-devel \
         bison \

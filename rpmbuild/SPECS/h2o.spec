@@ -3,21 +3,37 @@
 %{?perl_default_filter}
 %global __requires_exclude perl\\(VMS|perl\\(Win32|perl\\(Server::Starter
 
+%if 0%{?rhel} >= 8
+%define cmake cmake
+%else
+%define cmake cmake3
+%endif
+
+%define requires_brotli 1
+%if 0%{?amzn} == 2
+%define requires_brotli 0
+%endif
+
 Summary: H2O - The optimized HTTP/1, HTTP/2 server
 Name: h2o
 Version: 2.3.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/b4775b5320ad5061761bd72d5a8092d49e2e4f93.tar.gz
+Source0: https://github.com/h2o/h2o/archive/0a9ddbd14dd3004a8fa28c2c7904065fbada7afe.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
+Source7: brotli-1.0.9.tar.gz
 Patch2: 02-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+%if %{requires_brotli}
+BuildRequires: brotli-devel
+Requires: brotli
+%endif
 BuildRequires: gcc-c++, openssl-devel, pkgconfig, bison, zlib-devel
 %if 0%{?rhel} >= 8
 BuildRequires: cmake
@@ -62,21 +78,32 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -b 6 -n h2o-b4775b5320ad5061761bd72d5a8092d49e2e4f93
+%setup -q -n h2o-0a9ddbd14dd3004a8fa28c2c7904065fbada7afe
 %patch2 -p1
 
 %build
 
-cd ../wslay-1.1.1
-%configure --enable-shared="" --disable-shared --with-pic
-make && make install
+%if ! %{requires_brotli}
+   tar xf %{SOURCE7}
+   cd brotli-1.0.9
+   mkdir out && cd out
+   %cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_INSTALL_LIBDIR=%{_libdir}/h2o ..
+   make %{?_smp_mflags} && make install
+   cd ../..
+   export PKG_CONFIG_PATH=%{_libdir}/h2o/pkgconfig:$PKG_CONFIG_PATH
+   export LDFLAGS="-L%{_libdir}/h2o -Wl,-rpath,%{_libdir}/h2o $LDFLAGS"
+%endif
 
-cd ../h2o-b4775b5320ad5061761bd72d5a8092d49e2e4f93
+tar xf %{SOURCE6}
+cd wslay-1.1.1
+%configure --enable-shared="" --disable-shared --with-pic
+make %{?_smp_mflags} && make install
+cd ..
 
 %if 0%{?rhel} >= 8
-cmake -DWITH_BUNDLED_SSL=on -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
+%cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
 %else
-cmake3 -DWITH_BUNDLED_SSL=on -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
+%cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
 %endif
 
 make %{?_smp_mflags}
@@ -84,6 +111,12 @@ make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
+%if ! %{requires_brotli}
+   cd brotli-1.0.9/out
+   make DESTDIR=$RPM_BUILD_ROOT install
+   cd ../..
+%endif
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
@@ -200,6 +233,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/h2o/setuidgid
 %{_datadir}/h2o/start_server
 
+%if ! %{requires_brotli}
+   %dir %{_libdir}/h2o
+   %{_libdir}/h2o/libbrotlienc.so*
+   %{_libdir}/h2o/libbrotlidec.so*
+   %{_libdir}/h2o/libbrotlicommon.so*
+   %exclude %{_libdir}/h2o/*.a
+   %exclude %{_libdir}/h2o/pkgconfig/*.pc
+   %exclude /usr/include/brotli/*.h
+   %exclude /usr/sbin/brotli
+%endif
+
 %{_mandir}/man5/h2o.*
 %{_mandir}/man8/h2o.8*
 
@@ -231,6 +275,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+* Sat Nov 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-8
+- bump v2.3.0-0a9ddbd1
+
+* Sat Nov 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-7
+- bump v2.3.0-b4775b5
+
 * Sat Nov 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-6
 - bump v2.3.0-bf545b8
 

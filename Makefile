@@ -1,6 +1,8 @@
-SOURCE_ARCHIVE := b4775b5320ad5061761bd72d5a8092d49e2e4f93.tar.gz
+SOURCE_ARCHIVE := 0a9ddbd14dd3004a8fa28c2c7904065fbada7afe.tar.gz
 WSLAY_VERSION := 1.1.1
 WSLAY_SOURCE_ARCHIVE := wslay-$(WSLAY_VERSION).tar.gz
+BROTLI_VERSION := 1.0.9
+BROTLI_SOURCE_ARCHIVE := brotli-$(BROTLI_VERSION).tar.gz
 TARGZ_FILE := h2o.tar.gz
 IMAGE_NAME := h2o-package
 
@@ -31,8 +33,12 @@ rpmbuild/SOURCES/$(SOURCE_ARCHIVE):
 rpmbuild/SOURCES/$(WSLAY_SOURCE_ARCHIVE):
 	curl -sSL https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz -o rpmbuild/SOURCES/$(WSLAY_SOURCE_ARCHIVE)
 
+rpmbuild/SOURCES/$(BROTLI_SOURCE_ARCHIVE):
+	curl -sSL https://github.com/google/brotli/archive/refs/tags/v1.0.9.tar.gz -o rpmbuild/SOURCES/$(BROTLI_SOURCE_ARCHIVE)
+
 %.build: rpmbuild/SPECS/h2o.spec rpmbuild/SOURCES/$(SOURCE_ARCHIVE) \
 		rpmbuild/SOURCES/$(WSLAY_SOURCE_ARCHIVE) \
+		rpmbuild/SOURCES/$(BROTLI_SOURCE_ARCHIVE) \
 		rpmbuild/SOURCES/h2o.conf \
 		rpmbuild/SOURCES/h2o.logrotate rpmbuild/SOURCES/h2o.service \
 		rpmbuild/SOURCES/h2o.tmpfiles rpmbuild/SOURCES/index.html

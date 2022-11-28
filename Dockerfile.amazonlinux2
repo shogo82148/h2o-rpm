@@ -7,6 +7,7 @@ RUN yum install -y \
         rpmdevtools \
         cmake3 \
         gcc-c++ \
+        pkgconfig \
         tar \
         make \
         openssl-devel \
@@ -19,6 +20,7 @@ RUN yum install -y \
         automake \
         libtool \
         git
+
 
 ENV PKG_CONFIG_PATH=/usr/lib/pkgconfig
 RUN rpmdev-setuptree
