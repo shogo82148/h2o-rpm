@@ -26,7 +26,6 @@ Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
 Source7: brotli-1.0.9.tar.gz
-Patch1: 01-fix-brotli-link-error.patch
 Patch2: 02-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
@@ -80,7 +79,6 @@ build your own software using H2O.
 
 %prep
 %setup -q -n h2o-0a9ddbd14dd3004a8fa28c2c7904065fbada7afe
-%patch1 -p1
 %patch2 -p1
 
 %build
