@@ -3,6 +3,17 @@
 %{?perl_default_filter}
 %global __requires_exclude perl\\(VMS|perl\\(Win32|perl\\(Server::Starter
 
+%if 0%{?rhel} >= 8
+%define cmake cmake
+%else
+%define cmake cmake3
+%endif
+
+%define requires_brotli 1
+%if 0%{?amzn} == 2
+%define requires_brotli 0
+%endif
+
 Summary: H2O - The optimized HTTP/1, HTTP/2 server
 Name: h2o
 Version: 2.3.0
@@ -19,6 +30,10 @@ Patch2: 02-mruby-build-error.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+%if %{requires_brotli}
+BuildRequires: brotli-devel
+Requires: brotli
+%endif
 BuildRequires: gcc-c++, openssl-devel, pkgconfig, bison, zlib-devel
 %if 0%{?rhel} >= 8
 BuildRequires: cmake
@@ -67,23 +82,28 @@ build your own software using H2O.
 %patch2 -p1
 
 %build
-tar xf %{SOURCE7}
-cd brotli-1.0.9
-mkdir out && cd out
-cmake3 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/libexec/h2o ..
-cmake3 --build . --config Release --target install
-cd ../..
+
+%if ! %{requires_brotli}
+   tar xf %{SOURCE7}
+   cd brotli-1.0.9
+   mkdir out && cd out
+   %cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_INSTALL_LIBDIR=%{_libdir}/h2o ..
+   make %{?_smp_mflags} && make install
+   cd ../..
+   export PKG_CONFIG_PATH=%{_libdir}/h2o/pkgconfig:$PKG_CONFIG_PATH
+   export LDFLAGS="-L%{_libdir}/h2o -Wl,-rpath,%{_libdir}/h2o $LDFLAGS"
+%endif
 
 tar xf %{SOURCE6}
 cd wslay-1.1.1
 %configure --enable-shared="" --disable-shared --with-pic
-make && make install
+make %{?_smp_mflags} && make install
 cd ..
 
 %if 0%{?rhel} >= 8
-cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
+%cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
 %else
-cmake3 -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
+%cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
 %endif
 
 make %{?_smp_mflags}
@@ -91,6 +111,12 @@ make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
+%if ! %{requires_brotli}
+   cd brotli-1.0.9/out
+   make DESTDIR=$RPM_BUILD_ROOT install
+   cd ../..
+%endif
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
@@ -206,6 +232,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/h2o/kill-on-close
 %{_datadir}/h2o/setuidgid
 %{_datadir}/h2o/start_server
+
+%if ! %{requires_brotli}
+   %dir %{_libdir}/h2o
+   %{_libdir}/h2o/libbrotlienc.so*
+   %{_libdir}/h2o/libbrotlidec.so*
+   %{_libdir}/h2o/libbrotlicommon.so*
+   %exclude %{_libdir}/h2o/*.a
+   %exclude %{_libdir}/h2o/pkgconfig/*.pc
+   %exclude /usr/include/brotli/*.h
+   %exclude /usr/sbin/brotli
+%endif
 
 %{_mandir}/man5/h2o.*
 %{_mandir}/man8/h2o.8*
