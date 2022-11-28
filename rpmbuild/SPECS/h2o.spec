@@ -19,7 +19,7 @@ Name: h2o
 Version: 2.3.0
 Release: 9%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/f423c0207d584d4f6c16a369fb3c336dbb9ed6e2.tar.gz
+Source0: https://github.com/h2o/h2o/archive/ec1090a3d8c101f9c2f195bbea4370e36da95db7.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
@@ -79,7 +79,7 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -n h2o-f423c0207d584d4f6c16a369fb3c336dbb9ed6e2
+%setup -q -n h2o-ec1090a3d8c101f9c2f195bbea4370e36da95db7
 %patch1 -p1
 %patch2 -p1
 
@@ -273,6 +273,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+* Mon Nov 28 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-10
+- bump v2.3.0-ec1090a3
+
+* Mon Nov 28 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-9
+- bump v2.3.0-f423c02
+
 * Sat Nov 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-8
 - bump v2.3.0-0a9ddbd1
 
