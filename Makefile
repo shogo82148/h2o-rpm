@@ -85,3 +85,7 @@ clean:
 	docker rmi $(IMAGE_NAME)-amazonlinux2022 || true
 	docker rmi $(IMAGE_NAME)-rockylinux8 || true
 	docker rmi $(IMAGE_NAME)-rockylinux9 || true
+
+.PHONY: tag
+tag:
+	./scripts/tag.sh
