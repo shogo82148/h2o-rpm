@@ -35,7 +35,12 @@ BuildRequires: brotli-devel
 Requires: brotli
 %endif
 BuildRequires: gcc-c++, openssl-devel, pkgconfig, bison, zlib-devel
+
+%if 0%{?amzn} == 2022
+BuildRequires: ruby, ruby-devel, ruby3.1-rubygem-rake
+%else
 BuildRequires: ruby, ruby-devel, rubygem-rake
+%endif
 %if 0%{?rhel} >= 8
 BuildRequires: cmake
 %else
