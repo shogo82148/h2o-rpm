@@ -99,8 +99,6 @@ build your own software using H2O.
    export LDFLAGS="-L%{_libdir}/h2o -Wl,-rpath,%{_libdir}/h2o $LDFLAGS"
 %endif
 
-LDFLAGS="-no-pie $LDFLAGS"
-
 tar xf %{SOURCE6}
 cd wslay-1.1.1
 %configure --enable-shared="" --disable-shared --with-pic
