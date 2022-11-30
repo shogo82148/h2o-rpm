@@ -79,7 +79,7 @@ build your own software using H2O.
 
 %prep
 %setup -q -n h2o-d28b538833e454cba97f0c10a73eb0b3a9fc72cf
-$patch1 -p1
+%patch1 -p1
 %build
 
 %if ! %{requires_brotli}
