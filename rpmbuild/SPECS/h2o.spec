@@ -26,7 +26,7 @@ Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
 Source7: brotli-1.0.9.tar.gz
-Patch2: 01-disable-msg-zerocopy.patch
+Patch1: 01-disable-msg-zerocopy.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
