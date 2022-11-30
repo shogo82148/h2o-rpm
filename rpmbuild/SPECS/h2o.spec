@@ -17,16 +17,16 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2 server
 Name: h2o
 Version: 2.3.0
-Release: 29%{?dist}
+Release: 30%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/6bc369fcff1b92b1cd5de49a88b38757d2fe4793.tar.gz
+Source0: https://github.com/h2o/h2o/archive/d28b538833e454cba97f0c10a73eb0b3a9fc72cf.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
 Source7: brotli-1.0.9.tar.gz
-Patch2: 02-mruby-build-error.patch
+Patch1: 01-disable-msg-zerocopy.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -35,6 +35,12 @@ BuildRequires: brotli-devel
 Requires: brotli
 %endif
 BuildRequires: gcc-c++, openssl-devel, pkgconfig, bison, zlib-devel
+
+%if 0%{?amzn} == 2022
+BuildRequires: ruby, ruby-devel, ruby3.1-rubygem-rake
+%else
+BuildRequires: ruby, ruby-devel, rubygem-rake
+%endif
 %if 0%{?rhel} >= 8
 BuildRequires: cmake
 %else
@@ -78,9 +84,8 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -n h2o-6bc369fcff1b92b1cd5de49a88b38757d2fe4793
-%patch2 -p1
-
+%setup -q -n h2o-d28b538833e454cba97f0c10a73eb0b3a9fc72cf
+%patch1 -p1
 %build
 
 %if ! %{requires_brotli}
@@ -93,6 +98,8 @@ build your own software using H2O.
    export PKG_CONFIG_PATH=%{_libdir}/h2o/pkgconfig:$PKG_CONFIG_PATH
    export LDFLAGS="-L%{_libdir}/h2o -Wl,-rpath,%{_libdir}/h2o $LDFLAGS"
 %endif
+
+LDFLAGS="-no-pie $LDFLAGS"
 
 tar xf %{SOURCE6}
 cd wslay-1.1.1
@@ -271,6 +278,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+
+* Wed Nov 30 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-30
+- bump v2.3.0-d28b53883
 
 * Tue Nov 29 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-29
 - bump v2.3.0-6bc369fcf

@@ -16,6 +16,7 @@ RUN dnf install -y \
         brotli-devel \
         ruby \
         ruby-devel \
+        ruby3.1-rubygem-rake \
         bison \
         automake \
         libtool \
