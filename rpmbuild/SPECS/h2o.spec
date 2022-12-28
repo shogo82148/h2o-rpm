@@ -19,7 +19,7 @@ Name: h2o
 Version: 2.3.0
 Release: 31%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/cb831a4b51603bebc0274cef53274cded2882b68.tar.gz
+Source0: https://github.com/h2o/h2o/archive/0f08b675c8244fc4552a93e9b35271ecf5e0f8fa.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
@@ -278,6 +278,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+* Wed Dec 28 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-32
+- bump v2.3.0-0f08b675c
 
 * Wed Nov 30 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-31
 - bump v2.3.0-cb831a4b5
