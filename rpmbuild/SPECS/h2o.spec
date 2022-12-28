@@ -278,6 +278,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+* Wed Dec 28 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-32
+- fix minor version problem on Amazon Linux 2022
 
 * Wed Nov 30 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-31
 - bump v2.3.0-cb831a4b5
