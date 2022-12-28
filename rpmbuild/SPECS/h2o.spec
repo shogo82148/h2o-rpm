@@ -84,7 +84,7 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -n h2o-cb831a4b51603bebc0274cef53274cded2882b68
+%setup -q -n h2o-0f08b675c8244fc4552a93e9b35271ecf5e0f8fa
 %patch1 -p1
 %build
 
