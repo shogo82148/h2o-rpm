@@ -17,7 +17,7 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2 server
 Name: h2o
 Version: 2.3.0
-Release: 32%{?dist}
+Release: 33%{?dist}
 URL: https://h2o.examp1e.net/
 Source0: https://github.com/h2o/h2o/archive/0f08b675c8244fc4552a93e9b35271ecf5e0f8fa.tar.gz
 Source1: index.html
@@ -278,6 +278,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+* Wed Dec 28 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-33
+- do not lock the repository version on Amazon Linux 2022
+
 * Wed Dec 28 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-32
 - bump v2.3.0-0f08b675c
 - fix minor version problem on Amazon Linux 2022
