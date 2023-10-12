@@ -36,7 +36,7 @@ Requires: brotli
 %endif
 BuildRequires: gcc-c++, openssl-devel, pkgconfig, bison, zlib-devel
 
-%if 0%{?amzn} == 2022
+%if 0%{?amzn} >= 2022
 BuildRequires: ruby, ruby-devel, ruby3.1-rubygem-rake
 %else
 BuildRequires: ruby, ruby-devel, rubygem-rake

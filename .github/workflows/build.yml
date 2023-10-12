@@ -23,6 +23,7 @@ jobs:
         distribution:
           - amazonlinux2
           - amazonlinux2022
+          - amazonlinux2023
           - almalinux8
           - almalinux9
           - rockylinux8

@@ -7,7 +7,15 @@ IMAGE=$(perl -ne 'print $1 if /FROM\s+(.*)/' "Dockerfile.$H2O_DISTRO")
 ROOT=$(cd "$(dirname "$0")/../" && pwd)
 : "${PLATFORM:=linux/amd64}"
 
-if [[ "$H2O_DISTRO" = amazonlinux2022 ]]; then
+if [[ "$H2O_DISTRO" = amazonlinux2023 ]]; then
+    docker run \
+        --rm \
+        -v "$ROOT/$H2O_DISTRO.build:/build" \
+        --platform "$PLATFORM" \
+        "$IMAGE" \
+        sh -c "dnf update -y && dnf install -y \"/build/RPMS/\$(uname -m)/\"*.rpm"
+
+elif [[ "$H2O_DISTRO" = amazonlinux2022 ]]; then
     docker run \
         --rm \
         -v "$ROOT/$H2O_DISTRO.build:/build" \
