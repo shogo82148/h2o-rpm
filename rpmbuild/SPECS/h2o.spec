@@ -19,7 +19,7 @@ Name: h2o
 Version: 2.3.0
 Release: 33%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/0f08b675c8244fc4552a93e9b35271ecf5e0f8fa.tar.gz
+Source0: https://github.com/h2o/h2o/archive/9ab3feb4d7429ddda52a3cf84bd6da0e890bd52a.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
@@ -84,7 +84,7 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -n h2o-0f08b675c8244fc4552a93e9b35271ecf5e0f8fa
+%setup -q -n h2o-9ab3feb4d7429ddda52a3cf84bd6da0e890bd52a
 %patch1 -p1
 %build
 
@@ -278,6 +278,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/h2o
 
 %changelog
+* Thu Oct 12 2023 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-34
+- bump v2.3.0-9ab3feb4d
+
 * Wed Dec 28 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-33
 - do not lock the repository version on Amazon Linux 2022
 
