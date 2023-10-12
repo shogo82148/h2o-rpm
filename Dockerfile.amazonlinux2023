@@ -1,0 +1,32 @@
+FROM amazonlinux:2023
+ENV HOME /
+RUN dnf update -y
+RUN dnf install -y \
+        systemd \
+        rpm-build \
+        redhat-rpm-config \
+        rpmdevtools \
+        cmake \
+        gcc-c++ \
+        tar \
+        make \
+        openssl-devel \
+        libuv-devel \
+        zlib-devel \
+        brotli-devel \
+        ruby \
+        ruby-devel \
+        ruby3.1-rubygem-rake \
+        bison \
+        automake \
+        libtool \
+        git
+
+ENV PKG_CONFIG_PATH=/usr/lib/pkgconfig
+RUN rpmdev-setuptree
+RUN echo '%dist   .amzn2023' >> /.rpmmacros
+ADD ./rpmbuild/ /rpmbuild/
+RUN chown -R root:root /rpmbuild
+RUN rpmbuild -ba /rpmbuild/SPECS/h2o.spec
+RUN tar -czf /tmp/h2o.tar.gz -C /rpmbuild RPMS SRPMS
+CMD ["/bin/true"]

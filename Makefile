@@ -7,13 +7,16 @@ TARGZ_FILE := h2o.tar.gz
 IMAGE_NAME := h2o-package
 
 .PHONY: all
-all: amazonlinux2 amazonlinux2022 almalinux8 rockylinux8
+all: amazonlinux2 amazonlinux2022 amazonlinux2023 almalinux8 rockylinux8 almalinux9 rockylinux9
 
 .PHONY: amazonlinux2
 amazonlinux2: amazonlinux2.build
 
 .PHONY: amazonlinux2022
 amazonlinux2022: amazonlinux2022.build
+
+.PHONY: amazonlinux2023
+amazonlinux2023: amazonlinux2023.build
 
 .PHONY: almalinux8
 almalinux8: almalinux8.build
@@ -50,7 +53,7 @@ upload:
 	./scripts/upload.pl
 
 .PHONY: test
-test: test-amazonlinux2 test-amazonlinux2022 test-almalinux8 test-almalinux9 test-rockylinux8 test-rockylinux9
+test: test-amazonlinux2 test-amazonlinux2022 test-amazonlinux2023 test-almalinux8 test-almalinux9 test-rockylinux8 test-rockylinux9
 
 .PHONY: test-amazonlinux2
 test-amazonlinux2:
@@ -59,6 +62,10 @@ test-amazonlinux2:
 .PHONY: test-amazonlinux2022
 test-amazonlinux2022:
 	./scripts/test.sh amazonlinux2022
+
+.PHONY: test-amazonlinux2023
+test-amazonlinux2023:
+	./scripts/test.sh amazonlinux2023
 
 .PHONY: test-almalinux8
 test-almalinux8:
@@ -84,6 +91,7 @@ clean:
 	docker rmi $(IMAGE_NAME)-almalinux9 || true
 	docker rmi $(IMAGE_NAME)-amazonlinux2 || true
 	docker rmi $(IMAGE_NAME)-amazonlinux2022 || true
+	docker rmi $(IMAGE_NAME)-amazonlinux2023 || true
 	docker rmi $(IMAGE_NAME)-rockylinux8 || true
 	docker rmi $(IMAGE_NAME)-rockylinux9 || true
 
