@@ -27,6 +27,7 @@ Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
 Source7: brotli-1.1.0.tar.gz
 Patch1: 01-disable-msg-zerocopy.patch
+Patch2: 02-fix-build.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -86,6 +87,7 @@ build your own software using H2O.
 %prep
 %setup -q -n h2o-41c61d7abc10cb3e8e33b4c00320cb6b7e98077f
 %patch1 -p1
+%patch2 -p1
 %build
 
 %if ! %{requires_brotli}
