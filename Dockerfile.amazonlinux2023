@@ -25,6 +25,7 @@ RUN dnf install -y \
 ENV PKG_CONFIG_PATH=/usr/lib/pkgconfig
 RUN rpmdev-setuptree
 RUN echo '%dist   .amzn2023' >> /.rpmmacros
+RUN echo '%_smp_mflags -j1' >> /.rpmmacros
 ADD ./rpmbuild/ /rpmbuild/
 RUN chown -R root:root /rpmbuild
 RUN rpmbuild -ba /rpmbuild/SPECS/h2o.spec
