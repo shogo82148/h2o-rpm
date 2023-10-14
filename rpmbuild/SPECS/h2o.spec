@@ -278,6 +278,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/pkgconfig/libh2o-evloop.pc
 %{_includedir}/h2o.h
 %{_includedir}/h2o
+%{_includedir}/picotls.h
+%{_includedir}/picotls
+%{_includedir}/quicly.h
+%{_includedir}/quicly
 
 %changelog
 
