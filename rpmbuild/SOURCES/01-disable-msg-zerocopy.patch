@@ -1,26 +1,29 @@
 diff --git a/include/h2o/socket.h b/include/h2o/socket.h
-index 0c314ee9d..d77e32378 100644
+index 0c314ee9d..087909dff 100644
 --- a/include/h2o/socket.h
 +++ b/include/h2o/socket.h
-@@ -50,7 +50,7 @@ extern "C" {
+@@ -50,10 +50,6 @@ extern "C" {
  #endif
  #endif
  
 -#if defined(SO_ZEROCOPY) && defined(SO_EE_ORIGIN_ZEROCOPY)
-+#if defined(SO_ZEROCOPY) && defined(MSG_ZEROCOPY) && defined(SO_EE_ORIGIN_ZEROCOPY)
- #define H2O_USE_MSG_ZEROCOPY 1
- #endif
- 
+-#define H2O_USE_MSG_ZEROCOPY 1
+-#endif
+-
+ #if OPENSSL_VERSION_NUMBER >= 0x10002000L
+ #define H2O_USE_ALPN 1
+ #ifndef OPENSSL_NO_NEXTPROTONEG
 diff --git a/lib/common/socket/evloop.c.h b/lib/common/socket/evloop.c.h
-index e50e0ab13..879dde54f 100644
+index e50e0ab13..e85ef65f0 100644
 --- a/lib/common/socket/evloop.c.h
 +++ b/lib/common/socket/evloop.c.h
-@@ -85,7 +85,7 @@ static void evloop_do_on_socket_export(struct st_h2o_evloop_socket_t *sock);
+@@ -85,9 +85,6 @@ static void evloop_do_on_socket_export(struct st_h2o_evloop_socket_t *sock);
  #define H2O_USE_KQUEUE 1
  #elif defined(__linux)
  #define H2O_USE_EPOLL 1
 -#if defined(SO_ZEROCOPY) && defined(SO_EE_ORIGIN_ZEROCOPY)
-+#if defined(SO_ZEROCOPY) && defined(MSG_ZEROCOPY) && defined(SO_EE_ORIGIN_ZEROCOPY)
- #define H2O_USE_MSG_ZEROCOPY 1
- #endif
+-#define H2O_USE_MSG_ZEROCOPY 1
+-#endif
  #else
+ #define H2O_USE_POLL 1
+ #endif
