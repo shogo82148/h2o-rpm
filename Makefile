@@ -39,6 +39,7 @@ rpmbuild/SOURCES/$(BROTLI_SOURCE_ARCHIVE):
 %.build: rpmbuild/SPECS/h2o.spec rpmbuild/SOURCES/$(SOURCE_ARCHIVE) \
 		rpmbuild/SOURCES/$(WSLAY_SOURCE_ARCHIVE) \
 		rpmbuild/SOURCES/$(BROTLI_SOURCE_ARCHIVE) \
+		rpmbuild/SOURCES/01-disable-msg-zerocopy.patch \
 		rpmbuild/SOURCES/02-fix-build.patch \
 		rpmbuild/SOURCES/h2o.conf \
 		rpmbuild/SOURCES/h2o.logrotate rpmbuild/SOURCES/h2o.service \
