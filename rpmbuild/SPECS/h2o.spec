@@ -105,8 +105,9 @@ cd wslay-1.1.1
 make %{?_smp_mflags} && make install
 cd ..
 
-%cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on .
-
+mkdir -p build
+cd build
+%cmake -DWITH_MRUBY=on -DCMAKE_INSTALL_PREFIX=%{_prefix} -DBUILD_SHARED_LIBS=on ..
 make %{?_smp_mflags}
 
 
@@ -119,7 +120,9 @@ rm -rf $RPM_BUILD_ROOT
    cd ../..
 %endif
 
+cd build
 make DESTDIR=$RPM_BUILD_ROOT install
+cd ..
 
 mv $RPM_BUILD_ROOT%{_prefix}/bin \
         $RPM_BUILD_ROOT%{_sbindir}
