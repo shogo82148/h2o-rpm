@@ -1,16 +1,8 @@
-commit 49edfa3f324c1dbff482b1e141f0284121031984
-Author: ICHINOSE Shogo <shogo82148@gmail.com>
-Date:   Fri Oct 13 07:21:51 2023 +0900
-
-    Revert "read the version numbers rather than generating version.h"
-    
-    This reverts commit aae1287098c38fb615e6f7761b04d6a8b284cacd.
-
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e3df812ea..87efe7824 100644
+index b73bf97aa..97615a996 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -25,6 +25,17 @@ CMAKE_POLICY(SET CMP0042 NEW)
+@@ -27,6 +27,17 @@ ENDIF()
  
  PROJECT(h2o)
  
@@ -28,15 +20,15 @@ index e3df812ea..87efe7824 100644
  INCLUDE(GNUInstallDirs)
  INCLUDE(CheckCSourceCompiles)
  INCLUDE(CMakePushCheckState)
-@@ -32,6 +43,7 @@ INCLUDE(ExternalProject)
+@@ -35,6 +46,7 @@ INCLUDE(deps/picotls/cmake/boringssl-adjust.cmake)
  INCLUDE(deps/picotls/cmake/dtrace-utils.cmake)
- INCLUDE(deps/picotls/cmake/boringssl-adjust.cmake)
+ INCLUDE(deps/picotls/cmake/fusion.cmake)
  
 +CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in ${CMAKE_CURRENT_SOURCE_DIR}/include/h2o/version.h)
  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/libh2o.pc.in ${CMAKE_CURRENT_BINARY_DIR}/libh2o.pc @ONLY)
  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/libh2o-evloop.pc.in ${CMAKE_CURRENT_BINARY_DIR}/libh2o-evloop.pc @ONLY)
  
-@@ -615,20 +627,6 @@ ELSE ()
+@@ -608,20 +620,6 @@ ELSE ()
      ADD_LIBRARY(libh2o-evloop ${LIB_SOURCE_FILES})
  ENDIF (WSLAY_FOUND)
  
@@ -58,17 +50,10 @@ index e3df812ea..87efe7824 100644
      OUTPUT_NAME h2o
      VERSION ${LIBRARY_VERSION}
 diff --git a/include/h2o/version.h b/include/h2o/version.h
-index c22a22a24..da6382591 100644
+index c22a22a24..706d3112a 100644
 --- a/include/h2o/version.h
 +++ b/include/h2o/version.h
-@@ -1,5 +1,5 @@
- /*
-- * Copyright (c) 2014-2023 DeNA Co., Ltd., Kazuho Oku, Fastly
-+ * Copyright (c) 2014,2015 DeNA Co., Ltd.
-  *
-  * Permission is hereby granted, free of charge, to any person obtaining a copy
-  * of this software and associated documentation files (the "Software"), to
-@@ -31,14 +31,6 @@
+@@ -31,13 +31,6 @@
  #define H2O_VERSION_MINOR 3
  #define H2O_VERSION_PATCH 0
  
@@ -79,37 +64,15 @@ index c22a22a24..da6382591 100644
 -#endif
 -
 -/* `H2O_LIBRARY_VERSION` is a hard-coded string with three digits, that's the format we parse in CMakeLists.txt */
--#define H2O_LIBRARY_VERSION "0.16.0"
+ #define H2O_LIBRARY_VERSION "0.16.0"
  #define H2O_LIBRARY_VERSION_MAJOR 0
  #define H2O_LIBRARY_VERSION_MINOR 16
- #define H2O_LIBRARY_VERSION_PATCH 0
 diff --git a/version.h.in b/version.h.in
 new file mode 100644
-index 000000000..3d5cd9801
+index 000000000..fc6db3d1f
 --- /dev/null
 +++ b/version.h.in
-@@ -0,0 +1,43 @@
-+/*
-+ * Copyright (c) 2014,2015 DeNA Co., Ltd.
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a copy
-+ * of this software and associated documentation files (the "Software"), to
-+ * deal in the Software without restriction, including without limitation the
-+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
-+ * sell copies of the Software, and to permit persons to whom the Software is
-+ * furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-+ * IN THE SOFTWARE.
-+ */
+@@ -0,0 +1,22 @@
 +#ifndef h2o__version_h
 +#define h2o__version_h
 +
