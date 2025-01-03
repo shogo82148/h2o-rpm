@@ -1,5 +1,5 @@
 FROM amazonlinux:2023
-ENV HOME /
+ENV HOME=/
 RUN dnf update -y
 RUN dnf install -y \
         systemd \
