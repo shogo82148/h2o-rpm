@@ -232,6 +232,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_sbindir}/h2o
 %{_sbindir}/h2o-httpclient
+%{_sbindir}/h2olog
 %{_datadir}/h2o/annotate-backtrace-symbols
 %{_datadir}/h2o/fastcgi-cgi
 %{_datadir}/h2o/fetch-ocsp-response
