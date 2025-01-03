@@ -17,17 +17,16 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2, HTTP/3 server
 Name: h2o
 Version: 2.3.0
-Release: 55%{?dist}
+Release: 56%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/d750b56aa929d55d9d18b9d2a7adea53ec898114.tar.gz
+Source0: https://github.com/h2o/h2o/archive/ebcd7f47d89525fd93252a8ba99ca732abda0fdb.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
 Source7: brotli-1.1.0.tar.gz
-Patch1: 01-disable-msg-zerocopy.patch
-Patch2: 02-fix-build.patch
+Patch1: 01-fix-build.patch
 License: MIT
 Group: System Environment/Daemons
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -85,9 +84,8 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -n h2o-d750b56aa929d55d9d18b9d2a7adea53ec898114
+%setup -q -n h2o-ebcd7f47d89525fd93252a8ba99ca732abda0fdb
 %patch1 -p1
-%patch2 -p1
 %build
 
 %if ! %{requires_brotli}
@@ -234,6 +232,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_sbindir}/h2o
 %{_sbindir}/h2o-httpclient
+%{_sbindir}/h2olog
 %{_datadir}/h2o/annotate-backtrace-symbols
 %{_datadir}/h2o/fastcgi-cgi
 %{_datadir}/h2o/fetch-ocsp-response
@@ -246,7 +245,6 @@ rm -rf $RPM_BUILD_ROOT
    %{_libdir}/h2o/libbrotlienc.so*
    %{_libdir}/h2o/libbrotlidec.so*
    %{_libdir}/h2o/libbrotlicommon.so*
-   %exclude %{_libdir}/h2o/*.a
    %exclude %{_libdir}/h2o/pkgconfig/*.pc
    %exclude /usr/include/brotli/*.h
    %exclude /usr/sbin/brotli
@@ -287,6 +285,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/quicly
 
 %changelog
+
+* Wed Jan 01 2025 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-56
+- bump v2.3.0-ebcd7f47d89525fd93252a8ba99ca732abda0fdb
 
 * Sun Dec 01 2024 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-55
 - bump v2.3.0-d750b56aa929d55d9d18b9d2a7adea53ec898114

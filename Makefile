@@ -1,4 +1,4 @@
-SOURCE_ARCHIVE := d750b56aa929d55d9d18b9d2a7adea53ec898114.tar.gz
+SOURCE_ARCHIVE := ebcd7f47d89525fd93252a8ba99ca732abda0fdb.tar.gz
 WSLAY_VERSION := 1.1.1
 WSLAY_SOURCE_ARCHIVE := wslay-$(WSLAY_VERSION).tar.gz
 BROTLI_VERSION := 1.1.0
@@ -39,8 +39,7 @@ rpmbuild/SOURCES/$(BROTLI_SOURCE_ARCHIVE):
 %.build: rpmbuild/SPECS/h2o.spec rpmbuild/SOURCES/$(SOURCE_ARCHIVE) \
 		rpmbuild/SOURCES/$(WSLAY_SOURCE_ARCHIVE) \
 		rpmbuild/SOURCES/$(BROTLI_SOURCE_ARCHIVE) \
-		rpmbuild/SOURCES/01-disable-msg-zerocopy.patch \
-		rpmbuild/SOURCES/02-fix-build.patch \
+		rpmbuild/SOURCES/01-fix-build.patch \
 		rpmbuild/SOURCES/h2o.conf \
 		rpmbuild/SOURCES/h2o.logrotate rpmbuild/SOURCES/h2o.service \
 		rpmbuild/SOURCES/h2o.tmpfiles rpmbuild/SOURCES/index.html
