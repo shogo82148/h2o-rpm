@@ -245,7 +245,6 @@ rm -rf $RPM_BUILD_ROOT
    %{_libdir}/h2o/libbrotlienc.so*
    %{_libdir}/h2o/libbrotlidec.so*
    %{_libdir}/h2o/libbrotlicommon.so*
-   %exclude %{_libdir}/h2o/*.a
    %exclude %{_libdir}/h2o/pkgconfig/*.pc
    %exclude /usr/include/brotli/*.h
    %exclude /usr/sbin/brotli
