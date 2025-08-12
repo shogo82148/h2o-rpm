@@ -12,7 +12,7 @@ jobs:
     name: runner / actionlint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: actionlint
         uses: reviewdog/action-actionlint@v1
 
@@ -20,7 +20,7 @@ jobs:
     name: runner / rpmlint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: rpmlint
         uses: shogo82148/actions-rpmlint@v0
         with:
