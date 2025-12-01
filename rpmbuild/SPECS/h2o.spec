@@ -17,9 +17,9 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2, HTTP/3 server
 Name: h2o
 Version: 2.3.0
-Release: 57%{?dist}
+Release: 58%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/26b116e9536be8cf07036185e3edf9d721c9bac2.tar.gz
+Source0: https://github.com/h2o/h2o/archive/d838d9e609bac49deb8c027d64397821734471ab.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
@@ -84,7 +84,7 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -n h2o-26b116e9536be8cf07036185e3edf9d721c9bac2
+%setup -q -n h2o-d838d9e609bac49deb8c027d64397821734471ab
 %patch1 -p1
 %build
 
@@ -285,6 +285,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/quicly
 
 %changelog
+
+* Mon Dec 01 2025 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-58
+- bump v2.3.0-d838d9e609bac49deb8c027d64397821734471ab
 
 * Sat Feb 01 2025 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-57
 - bump v2.3.0-26b116e9536be8cf07036185e3edf9d721c9bac2
