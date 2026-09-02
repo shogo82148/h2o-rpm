@@ -95,3 +95,30 @@ index 000000000..fc6db3d1f
 +#define H2O_LIBRARY_VERSION_PATCH @LIBRARY_VERSION_PATCH@
 +
 +#endif
+diff --git a/deps/neverbleed/neverbleed.c b/deps/neverbleed/neverbleed.c
+index 570e7db95..ad0abe39f 100644
+--- a/deps/neverbleed/neverbleed.c
++++ b/deps/neverbleed/neverbleed.c
+@@ -71,6 +71,22 @@
+ #ifdef NEVERBLEED_ECDSA
+ #include <openssl/ec.h>
+ #endif
++/* RHEL 10 keeps the ENGINE symbols for ABI compatibility but removes their
++ * declarations from the headers. Neverbleed still requires the legacy API. */
++#ifdef OPENSSL_NO_ENGINE
++ENGINE *ENGINE_by_id(const char *id);
++int ENGINE_init(ENGINE *e);
++int ENGINE_set_default_RSA(ENGINE *e);
++ENGINE *ENGINE_new(void);
++int ENGINE_set_id(ENGINE *e, const char *id);
++int ENGINE_set_name(ENGINE *e, const char *name);
++int ENGINE_set_RSA(ENGINE *e, const RSA_METHOD *rsa_meth);
++#ifdef NEVERBLEED_ECDSA
++int ENGINE_set_EC(ENGINE *e, const EC_KEY_METHOD *ecdsa_meth);
++#endif
++int ENGINE_add(ENGINE *e);
++int ENGINE_free(ENGINE *e);
++#endif
+ #include <openssl/rand.h>
+ #include <openssl/rsa.h>
+ #include <openssl/ssl.h>

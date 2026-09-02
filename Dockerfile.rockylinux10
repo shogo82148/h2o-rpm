@@ -1,0 +1,33 @@
+FROM rockylinux/rockylinux:10
+ENV HOME=/
+RUN dnf update -y
+RUN dnf install -y \
+        systemd \
+        rpm-build \
+        redhat-rpm-config \
+        rpmdevtools \
+        cmake \
+        gcc-c++ \
+        tar \
+        make \
+        openssl-devel \
+        zlib \
+        zlib-devel \
+        brotli-devel \
+        ruby \
+        ruby-devel \
+        rubygem-rake \
+        bison \
+        automake \
+        libtool \
+        git
+
+RUN dnf --enablerepo crb install -y libuv-devel
+
+RUN rpmdev-setuptree
+RUN echo '%dist   .el10' >> /.rpmmacros
+ADD ./rpmbuild/ /rpmbuild/
+RUN chown -R root:root /rpmbuild
+RUN rpmbuild -ba /rpmbuild/SPECS/h2o.spec
+RUN tar -czf /tmp/h2o.tar.gz -C /rpmbuild RPMS SRPMS
+CMD ["/bin/true"]
