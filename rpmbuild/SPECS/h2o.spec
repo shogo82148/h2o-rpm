@@ -1,5 +1,12 @@
 %define docroot /var/www
 
+# H2O's build invokes mruby's Rake build from a parallel CMake build.  When
+# RPM's LTO flags are enabled, GCC starts another make process during linking;
+# that process inherits unusable jobserver descriptors through Rake and fails
+# with "write jobserver: Bad file descriptor".  Disable LTO for this package
+# while retaining the distribution's other optimization and hardening flags.
+%global _lto_cflags %{nil}
+
 %{?perl_default_filter}
 %global __requires_exclude perl\\(VMS|perl\\(Win32|perl\\(Server::Starter
 
@@ -17,7 +24,7 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2, HTTP/3 server
 Name: h2o
 Version: 2.3.0
-Release: 57%{?dist}
+Release: 58%{?dist}
 URL: https://h2o.examp1e.net/
 Source0: https://github.com/h2o/h2o/archive/26b116e9536be8cf07036185e3edf9d721c9bac2.tar.gz
 Source1: index.html
@@ -285,6 +292,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/quicly
 
 %changelog
+
+* Wed Sep 02 2026 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-58
+- disable LTO to avoid nested make jobserver failures during linking
 
 * Sat Feb 01 2025 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-57
 - bump v2.3.0-26b116e9536be8cf07036185e3edf9d721c9bac2
