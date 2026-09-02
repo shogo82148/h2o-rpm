@@ -12,16 +12,16 @@ jobs:
     name: runner / actionlint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: actionlint
-        uses: reviewdog/action-actionlint@v1
+        uses: reviewdog/action-actionlint@d290e336d5a743810aef4404f757dc862276d2ae # v1.73.4
 
   rpmlint:
     name: runner / rpmlint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: rpmlint
-        uses: shogo82148/actions-rpmlint@v0
+        uses: shogo82148/actions-rpmlint@0b55d29c2e1d3c880a0163fec05d12aba77bfb67 # v0.1.0
         with:
           rpmlint_flags: rpmbuild/SPECS/h2o.spec
