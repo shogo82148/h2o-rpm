@@ -265,6 +265,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_datadir}/h2o/ca-bundle.crt
 %{_datadir}/h2o/status
+%{_datadir}/h2o/acme
 
 %dir %{docroot}
 %dir %{docroot}/html
@@ -296,6 +297,7 @@ rm -rf $RPM_BUILD_ROOT
 * Wed Sep 02 2026 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-58
 - disable LTO to avoid nested make jobserver failures during linking
 - bump v2.3.0-706842c0f8c0d9422efb97a4d8ef7d6ec9df87b7
+- package ACME support files installed by recent H2O versions
 
 * Sat Feb 01 2025 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-57
 - bump v2.3.0-26b116e9536be8cf07036185e3edf9d721c9bac2
