@@ -26,7 +26,7 @@ Name: h2o
 Version: 2.3.0
 Release: 58%{?dist}
 URL: https://h2o.examp1e.net/
-Source0: https://github.com/h2o/h2o/archive/26b116e9536be8cf07036185e3edf9d721c9bac2.tar.gz
+Source0: https://github.com/h2o/h2o/archive/706842c0f8c0d9422efb97a4d8ef7d6ec9df87b7.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
 Source4: h2o.service
@@ -91,7 +91,7 @@ libh2o-devel package provides H2O header files and helpers which allow you to
 build your own software using H2O.
 
 %prep
-%setup -q -n h2o-26b116e9536be8cf07036185e3edf9d721c9bac2
+%setup -q -n h2o-706842c0f8c0d9422efb97a4d8ef7d6ec9df87b7
 %patch1 -p1
 %build
 
@@ -265,6 +265,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_datadir}/h2o/ca-bundle.crt
 %{_datadir}/h2o/status
+%{_datadir}/h2o/acme
 
 %dir %{docroot}
 %dir %{docroot}/html
@@ -295,6 +296,8 @@ rm -rf $RPM_BUILD_ROOT
 
 * Wed Sep 02 2026 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-58
 - disable LTO to avoid nested make jobserver failures during linking
+- bump v2.3.0-706842c0f8c0d9422efb97a4d8ef7d6ec9df87b7
+- package ACME support files installed by recent H2O versions
 
 * Sat Feb 01 2025 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-57
 - bump v2.3.0-26b116e9536be8cf07036185e3edf9d721c9bac2
