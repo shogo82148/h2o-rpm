@@ -99,8 +99,9 @@ diff --git a/deps/neverbleed/neverbleed.c b/deps/neverbleed/neverbleed.c
 index 570e7db95..ad0abe39f 100644
 --- a/deps/neverbleed/neverbleed.c
 +++ b/deps/neverbleed/neverbleed.c
-@@ -76 +76,18 @@
- #include <openssl/ssl.h>
+@@ -74,3 +74,19 @@
+ #include <openssl/rand.h>
+ #include <openssl/rsa.h>
 +/* RHEL 10 keeps the ENGINE symbols for ABI compatibility but removes their
 + * declarations from the headers. Neverbleed still requires the legacy API. */
 +#ifdef OPENSSL_NO_ENGINE
@@ -117,4 +118,4 @@ index 570e7db95..ad0abe39f 100644
 +int ENGINE_add(ENGINE *e);
 +int ENGINE_free(ENGINE *e);
 +#endif
-+
+ #include <openssl/ssl.h>
