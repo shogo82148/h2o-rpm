@@ -14,9 +14,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - id: generate
-        uses: shogo82148/actions-github-app-token@v1
+        uses: shogo82148/actions-github-app-token@23fb7b487bbb34ec0de312a6bb579dd98e217a45 # v1.3.2
       - id: update
         name: update
         run: |
@@ -24,7 +24,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
-      - uses: shogo82148/actions-commit-and-create-pr@v1
+      - uses: shogo82148/actions-commit-and-create-pr@b1322fe9da4037e9720e34ea221997cffcd3498d # v1.1.4
         with:
           github-token: ${{ steps.generate.outputs.token }}
           commit-message: bump h2o ${{ steps.update.outputs.latest-version }}
