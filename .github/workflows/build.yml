@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ case(matrix.architecture == 'arm64', 'ubuntu-24.04-arm', 'ubuntu-24.04') }}
     timeout-minutes: 360
     strategy:
       fail-fast: false
@@ -27,28 +27,24 @@ jobs:
           - almalinux9
           - rockylinux8
           - rockylinux9
-        platform:
-          - linux/amd64
-          - linux/arm64
-        exclude:
-          - distribution: amazonlinux2023
-            platform: linux/arm64
+        architecture:
+          - amd64
+          - arm64
 
     steps:
-      - uses: docker/setup-qemu-action@1f40c72289eff860ee54a304f1438e3cff362e0a # v4.3.0
       - uses: docker/setup-buildx-action@37fe631027851001ddb9b187196cc803df7f5f0e # v4.3.0
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: build
         run: |
           make ${{ matrix.distribution }}
         env:
-          PLATFORM: ${{ matrix.platform }}
+          PLATFORM: linux/${{ matrix.architecture }}
 
       - name: test
         run: |
           make test-${{ matrix.distribution }}
         env:
-          PLATFORM: ${{ matrix.platform }}
+          PLATFORM: linux/${{ matrix.architecture }}
 
       - name: Configure AWS Credentials
         uses: fuller-inc/actions-aws-assume-role@db10fc9ddce76ac14ce9182c2433f497580bec93 # v1.9.2
