@@ -33,7 +33,7 @@ Source3: h2o.tmpfiles
 Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
-Source7: https://github.com/google/brotli/archive/v1.1.0/brotli-1.1.0.tar.gz
+Source7: https://github.com/google/brotli/archive/v1.2.0/brotli-1.2.0.tar.gz
 Patch1: 01-fix-build.patch
 License: MIT
 Group: System Environment/Daemons
@@ -98,7 +98,7 @@ build your own software using H2O.
 
 %if ! %{requires_brotli}
    tar xf %{SOURCE7}
-   cd brotli-1.1.0
+   cd brotli-1.2.0
    mkdir out && cd out
    %cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_INSTALL_LIBDIR=%{_libdir}/h2o ..
    make %{?_smp_mflags} && make install
@@ -125,7 +125,7 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 
 %if ! %{requires_brotli}
-   cd brotli-1.1.0/out
+   cd brotli-1.2.0/out
    make DESTDIR=$RPM_BUILD_ROOT install
    cd ../..
 %endif
