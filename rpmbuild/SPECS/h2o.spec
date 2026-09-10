@@ -24,7 +24,7 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2, HTTP/3 server
 Name: h2o
 Version: 2.3.0
-Release: 58%{?dist}
+Release: 59%{?dist}
 URL: https://h2o.examp1e.net/
 Source0: https://github.com/h2o/h2o/archive/706842c0f8c0d9422efb97a4d8ef7d6ec9df87b7.tar.gz
 Source1: index.html
@@ -33,7 +33,7 @@ Source3: h2o.tmpfiles
 Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
-Source7: https://github.com/google/brotli/archive/v1.1.0/brotli-1.1.0.tar.gz
+Source7: https://github.com/google/brotli/archive/v1.2.0/brotli-1.2.0.tar.gz
 Patch1: 01-fix-build.patch
 License: MIT
 Group: System Environment/Daemons
@@ -98,7 +98,7 @@ build your own software using H2O.
 
 %if ! %{requires_brotli}
    tar xf %{SOURCE7}
-   cd brotli-1.1.0
+   cd brotli-1.2.0
    mkdir out && cd out
    %cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=%{_prefix} -DCMAKE_INSTALL_LIBDIR=%{_libdir}/h2o ..
    make %{?_smp_mflags} && make install
@@ -125,7 +125,7 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 
 %if ! %{requires_brotli}
-   cd brotli-1.1.0/out
+   cd brotli-1.2.0/out
    make DESTDIR=$RPM_BUILD_ROOT install
    cd ../..
 %endif
@@ -253,6 +253,8 @@ fi
    %exclude %{_libdir}/h2o/pkgconfig/*.pc
    %exclude /usr/include/brotli/*.h
    %exclude /usr/sbin/brotli
+   %exclude %{_mandir}/man1/brotli.1*
+   %exclude %{_mandir}/man3/*.h.3*
 %endif
 
 %{_mandir}/man5/h2o.*
@@ -291,6 +293,9 @@ fi
 %{_includedir}/quicly
 
 %changelog
+
+* Thu Sep 10 2026 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-59
+- bump bundled brotli to v1.2.0
 
 * Wed Sep 02 2026 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-58
 - disable LTO to avoid nested make jobserver failures during linking
