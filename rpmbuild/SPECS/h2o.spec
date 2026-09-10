@@ -254,6 +254,7 @@ fi
    %exclude /usr/include/brotli/*.h
    %exclude /usr/sbin/brotli
    %exclude %{_mandir}/man1/brotli.1*
+   %exclude %{_mandir}/man3/*.h.3*
 %endif
 
 %{_mandir}/man5/h2o.*
