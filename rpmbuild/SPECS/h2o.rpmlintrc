@@ -1,0 +1,11 @@
+# rpmlint configuration for h2o.spec
+# Automatically loaded by rpmlint when checking the spec in this directory
+# (rpmlint globs *.rpmlintrc next to the analyzed file).
+
+# lib-package-without-%mklibname: %mklibname is a Mageia/Mandriva-only macro
+# and does not exist on RHEL/Fedora/Amazon Linux, which is what we target.
+addFilter("lib-package-without-%mklibname")
+
+# no-%check-section: h2o has no test suite that can be run at RPM build time,
+# so there is nothing meaningful to put in a %check section.
+addFilter("no-%check-section")
