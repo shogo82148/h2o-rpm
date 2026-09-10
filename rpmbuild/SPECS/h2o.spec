@@ -29,10 +29,11 @@ URL: https://h2o.examp1e.net/
 Source0: https://github.com/h2o/h2o/archive/706842c0f8c0d9422efb97a4d8ef7d6ec9df87b7.tar.gz
 Source1: index.html
 Source2: h2o.logrotate
+Source3: h2o.tmpfiles
 Source4: h2o.service
 Source5: h2o.conf
 Source6: https://github.com/tatsuhiro-t/wslay/releases/download/release-1.1.1/wslay-1.1.1.tar.gz
-Source7: brotli-1.1.0.tar.gz
+Source7: https://github.com/google/brotli/archive/v1.1.0/brotli-1.1.0.tar.gz
 Patch1: 01-fix-build.patch
 License: MIT
 Group: System Environment/Daemons
@@ -92,7 +93,7 @@ build your own software using H2O.
 
 %prep
 %setup -q -n h2o-706842c0f8c0d9422efb97a4d8ef7d6ec9df87b7
-%patch1 -p1
+%patch -P 1 -p1
 %build
 
 %if ! %{requires_brotli}
@@ -137,12 +138,12 @@ mv $RPM_BUILD_ROOT%{_prefix}/bin \
         $RPM_BUILD_ROOT%{_sbindir}
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/h2o
-install -m 644 -p $RPM_SOURCE_DIR/h2o.conf \
+install -m 644 -p %{SOURCE5} \
         $RPM_BUILD_ROOT%{_sysconfdir}/h2o/h2o.conf
 
 # docroot
 mkdir -p $RPM_BUILD_ROOT%{docroot}/html
-install -m 644 -p $RPM_SOURCE_DIR/index.html \
+install -m 644 -p %{SOURCE1} \
         $RPM_BUILD_ROOT%{docroot}/html/index.html
 
 # Set up /var directories
@@ -150,20 +151,20 @@ mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/log/h2o
 
 # Install systemd service files
 mkdir -p $RPM_BUILD_ROOT%{_unitdir}
-install -m 644 -p $RPM_SOURCE_DIR/h2o.service \
-	$RPM_BUILD_ROOT%{_unitdir}/h2o.service
+install -m 644 -p %{SOURCE4} \
+        $RPM_BUILD_ROOT%{_unitdir}/h2o.service
 
 mkdir -p $RPM_BUILD_ROOT/run/h2o
 
 # Install tmpfiles.d configuration
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/tmpfiles.d
-install -m 644 -p $RPM_SOURCE_DIR/h2o.tmpfiles \
-	$RPM_BUILD_ROOT%{_prefix}/lib/tmpfiles.d/h2o.conf
+mkdir -p $RPM_BUILD_ROOT%{_tmpfilesdir}
+install -m 644 -p %{SOURCE3} \
+        $RPM_BUILD_ROOT%{_tmpfilesdir}/h2o.conf
 
 # install log rotation stuff
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d
-install -m 644 -p $RPM_SOURCE_DIR/h2o.logrotate \
-	$RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/h2o
+install -m 644 -p %{SOURCE2} \
+        $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/h2o
 
 %define sslcert %{_sysconfdir}/pki/tls/certs/localhost.crt
 %define sslkey %{_sysconfdir}/pki/tls/private/localhost.key
@@ -223,9 +224,6 @@ fi
 
 %postun -n libh2o-evloop -p /sbin/ldconfig
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
 %defattr(-,root,root)
 
@@ -235,7 +233,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_unitdir}/h2o.service
 
-%{_prefix}/lib/tmpfiles.d/h2o.conf
+%{_tmpfilesdir}/h2o.conf
 
 %{_sbindir}/h2o
 %{_sbindir}/h2o-httpclient
