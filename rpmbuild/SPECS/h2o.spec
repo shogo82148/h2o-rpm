@@ -24,7 +24,7 @@
 Summary: H2O - The optimized HTTP/1, HTTP/2, HTTP/3 server
 Name: h2o
 Version: 2.3.0
-Release: 58%{?dist}
+Release: 59%{?dist}
 URL: https://h2o.examp1e.net/
 Source0: https://github.com/h2o/h2o/archive/706842c0f8c0d9422efb97a4d8ef7d6ec9df87b7.tar.gz
 Source1: index.html
@@ -293,6 +293,9 @@ fi
 %{_includedir}/quicly
 
 %changelog
+
+* Thu Sep 10 2026 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-59
+- bump bundled brotli to v1.2.0
 
 * Wed Sep 02 2026 ICHINOSE Shogo <shogo82148@gmail.com> - 2.3.0-58
 - disable LTO to avoid nested make jobserver failures during linking
