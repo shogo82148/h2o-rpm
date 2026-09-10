@@ -253,6 +253,7 @@ fi
    %exclude %{_libdir}/h2o/pkgconfig/*.pc
    %exclude /usr/include/brotli/*.h
    %exclude /usr/sbin/brotli
+   %exclude %{_mandir}/man1/brotli.1*
 %endif
 
 %{_mandir}/man5/h2o.*
