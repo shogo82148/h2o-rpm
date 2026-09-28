@@ -15,6 +15,14 @@ if [[ "$H2O_DISTRO" = amazonlinux2023 ]]; then
         "$IMAGE" \
         sh -c "dnf update -y && dnf install -y \"/build/RPMS/\$(uname -m)/\"*.rpm"
 
+elif [[ "$H2O_DISTRO" = almalinux9 ]]; then
+    docker run \
+        --rm \
+        -v "$ROOT/$H2O_DISTRO.build:/build" \
+        --platform "$PLATFORM" \
+        "$IMAGE" \
+        sh -c "dnf --releasever=9 update -y && dnf --releasever=9 --enablerepo crb install -y \"/build/RPMS/\$(uname -m)/\"*.rpm"
+
 elif docker run --rm --platform "$PLATFORM" "$IMAGE" sh -c "command -v dnf"; then
     if docker run --rm --platform "$PLATFORM" "$IMAGE" sh -c " dnf repolist --all" | grep powertools; then
         docker run \

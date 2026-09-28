@@ -1,7 +1,7 @@
 FROM almalinux:9
 ENV HOME=/
-RUN dnf update -y
-RUN dnf install -y \
+RUN dnf --releasever=9 update -y
+RUN dnf --releasever=9 install -y \
         rpm-build \
         redhat-rpm-config \
         rpmdevtools \
@@ -21,7 +21,7 @@ RUN dnf install -y \
         libtool \
         git
 
-RUN dnf --enablerepo crb install -y libuv-devel
+RUN dnf --releasever=9 --enablerepo crb install -y libuv-devel
 
 RUN rpmdev-setuptree
 RUN echo '%dist   .el9' >> /.rpmmacros
