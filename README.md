@@ -3,7 +3,7 @@
 [![build](https://github.com/shogo82148/h2o-rpm/actions/workflows/build.yml/badge.svg)](https://github.com/shogo82148/h2o-rpm/actions/workflows/build.yml)
 
 This provides [H2O](https://h2o.examp1e.net/) RPM spec file and required files
-e.g. systemd service etc. to build RPM for RHEL/CentOS 7/8, and Amazon Linux 2.
+e.g. systemd service etc. to build RPM.
 
 ## How to use prebuilt RPM
 
@@ -13,48 +13,52 @@ Once the file is correctly saved, you can install packages in the repository by
 yum install h2o
 ```
 
-### Amazon Linux 2
+### Amazon Linux 2023
 
-To add unofficial h2o yum repository, create a file named `/etc/yum.repos.d/shogo82148.repo`.
+Install the RPM package for configure the repository.
 
-```ini
-# shogo82148-rpm - packages by shogo82148
-[shogo82148-rpm]
-name=shogo82148-rpm
-baseurl=https://shogo82148-rpm-repository.s3-ap-northeast-1.amazonaws.com/amazonlinux/$releasever/$basearch/
-gpgcheck=1
-enabled=1
-gpgkey=https://shogo82148-rpm-repository.s3-ap-northeast-1.amazonaws.com/RPM-GPG-KEY-shogo82148
+```shell
+dnf install https://shogo82148-rpm-repository.s3.ap-northeast-1.amazonaws.com/amazonlinux/2023/noarch/shogo82148/shogo82148-1.0.9-1.amzn2023.noarch.rpm
 ```
 
-Or install the RPM package for configure the repository.
+### AlmaLinux 8, 9 and 10
 
-```
-yum install -y https://shogo82148-rpm-repository.s3-ap-northeast-1.amazonaws.com/amazonlinux/2/noarch/shogo82148/shogo82148-1.0.0-1.amzn2.noarch.rpm
-```
+AlmaLinux 10:
 
-### CentOS 7 and 8
-
-To add unofficial h2o yum repository, create a file named `/etc/yum.repos.d/shogo82148.repo`.
-
-```ini
-# shogo82148-rpm - packages by shogo82148
-[shogo82148-rpm]
-name=shogo82148-rpm
-baseurl=https://shogo82148-rpm-repository.s3-ap-northeast-1.amazonaws.com/centos/$releasever/$basearch/
-gpgcheck=1
-enabled=1
-gpgkey=https://shogo82148-rpm-repository.s3-ap-northeast-1.amazonaws.com/RPM-GPG-KEY-shogo82148
+```shell
+dnf install https://shogo82148-rpm-repository.s3.ap-northeast-1.amazonaws.com/almalinux/10/noarch/shogo82148/shogo82148-1.0.9-1.el10.noarch.rpm
 ```
 
-Or install the RPM package for configure the repository.
+AlmaLinux 9:
 
-```bash
-# CentOS 7
-yum install -y https://shogo82148-rpm-repository.s3-ap-northeast-1.amazonaws.com/centos/7/noarch/shogo82148/shogo82148-1.0.0-1.el7.noarch.rpm
+```shell
+dnf install https://shogo82148-rpm-repository.s3.ap-northeast-1.amazonaws.com/almalinux/9/noarch/shogo82148/shogo82148-1.0.9-1.el9.noarch.rpm
+```
 
-# CentOS 8
-dnf install -y https://shogo82148-rpm-repository.s3-ap-northeast-1.amazonaws.com/centos/8/noarch/shogo82148/shogo82148-1.0.0-1.el8.noarch.rpm
+AlmaLinux 8:
+
+```shell
+yum install https://shogo82148-rpm-repository.s3.ap-northeast-1.amazonaws.com/almalinux/8/noarch/shogo82148/shogo82148-1.0.9-1.el8.noarch.rpm
+```
+
+### Rocky Linux 8, 9 and 10
+
+Rocky Linux 10:
+
+```shell
+dnf install https://shogo82148-rpm-repository.s3.ap-northeast-1.amazonaws.com/rockylinux/10/noarch/shogo82148/shogo82148-1.0.9-1.el10.noarch.rpm
+```
+
+Rocky Linux 9:
+
+```shell
+dnf install https://shogo82148-rpm-repository.s3.ap-northeast-1.amazonaws.com/rockylinux/9/noarch/shogo82148/shogo82148-1.0.9-1.el9.noarch.rpm
+```
+
+Rocky Linux 8:
+
+```shell
+yum install https://shogo82148-rpm-repository.s3.ap-northeast-1.amazonaws.com/rockylinux/8/noarch/shogo82148/shogo82148-1.0.9-1.el8.noarch.rpm
 ```
 
 ## License
