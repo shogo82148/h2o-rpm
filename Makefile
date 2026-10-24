@@ -7,10 +7,7 @@ TARGZ_FILE := h2o.tar.gz
 IMAGE_NAME := h2o-package
 
 .PHONY: all
-all: amazonlinux2 amazonlinux2023 almalinux8 rockylinux8 almalinux9 rockylinux9 almalinux10 rockylinux10
-
-.PHONY: amazonlinux2
-amazonlinux2: amazonlinux2.build
+all: amazonlinux2023 almalinux8 rockylinux8 almalinux9 rockylinux9 almalinux10 rockylinux10
 
 .PHONY: amazonlinux2023
 amazonlinux2023: amazonlinux2023.build
@@ -56,11 +53,7 @@ upload:
 	./scripts/upload.pl
 
 .PHONY: test
-test: test-amazonlinux2 test-amazonlinux2023 test-almalinux8 test-almalinux9 test-almalinux10 test-rockylinux8 test-rockylinux9 test-rockylinux10
-
-.PHONY: test-amazonlinux2
-test-amazonlinux2:
-	./scripts/test.sh amazonlinux2
+test: test-amazonlinux2023 test-almalinux8 test-almalinux9 test-almalinux10 test-rockylinux8 test-rockylinux9 test-rockylinux10
 
 .PHONY: test-amazonlinux2023
 test-amazonlinux2023:
@@ -97,7 +90,6 @@ clean:
 	docker rmi $(IMAGE_NAME)-almalinux8 || true
 	docker rmi $(IMAGE_NAME)-almalinux9 || true
 	docker rmi $(IMAGE_NAME)-almalinux10 || true
-	docker rmi $(IMAGE_NAME)-amazonlinux2 || true
 	docker rmi $(IMAGE_NAME)-amazonlinux2023 || true
 	docker rmi $(IMAGE_NAME)-rockylinux8 || true
 	docker rmi $(IMAGE_NAME)-rockylinux9 || true
