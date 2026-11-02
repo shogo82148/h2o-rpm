@@ -9,7 +9,7 @@ workflows:
         - 'docker/setup-buildx-action@v4.4.0'
     '.github/workflows/reviewdog.yml':
         - 'actions/checkout@v7.0.1'
-        - 'reviewdog/action-actionlint@v1.80.8'
+        - 'reviewdog/action-actionlint@v1.81.1'
         - 'shogo82148/actions-rpmlint@v0.2.5'
     '.github/workflows/update.yml':
         - 'actions/checkout@v7.0.1'
@@ -31,9 +31,9 @@ dependencies:
         commit: 'sha1-594f3bf4285d9ea8dc53c9a0c9c4092420091003'
         owner_id: 5429470
         repo_id: 288485773
-    'reviewdog/action-actionlint@v1.80.8':
-        ref: 'v1.80.8'
-        commit: 'sha1-cfa6a621f27735ccc88d35af9d0608692fd9b9f7'
+    'reviewdog/action-actionlint@v1.81.1':
+        ref: 'v1.81.1'
+        commit: 'sha1-619a81ec64ff8c0211cd6146eb2b21e8f1d7f440'
         owner_id: 48765237
         repo_id: 385059686
     'shogo82148/actions-commit-and-create-pr@v1.1.4':
