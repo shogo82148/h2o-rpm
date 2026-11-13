@@ -16,7 +16,7 @@ jobs:
         with:
           persist-credentials: false
       - name: actionlint
-        uses: reviewdog/action-actionlint@v1.83.0
+        uses: reviewdog/action-actionlint@v1.84.0
 
   rpmlint:
     name: runner / rpmlint
